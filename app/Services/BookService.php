@@ -23,4 +23,17 @@ class BookService
         }
     }
 
+    public function show(int $id){
+        $book = Book::with('genre')->find($id);
+        if(!$book){
+            return Response()->json([
+                'status' => 'error',
+                'message' => 'livro não encontrado',
+            ], 404);
+        }
+
+        return Response()->json($book, 200);
+
+    }
+
 }
