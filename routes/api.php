@@ -25,3 +25,4 @@ Route::put('/users/{id}', [\App\Http\Controllers\UserController::class, 'update'
 Route::delete('/users/{id}', [\App\Http\Controllers\UserController::class, 'destroy']);
 
 Route::post('/books', [\App\Http\Controllers\BookController::class, 'store']);
+Route::get('/books/{id}', [\App\Http\Controllers\BookController::class, 'show']);
