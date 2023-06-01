@@ -21,7 +21,6 @@ class UserService
 
         }catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
             return Response()->json([
                 'status' => 'error',
                 'message' => 'erro ao cadastrar usuário',
@@ -29,12 +28,16 @@ class UserService
         }
     }
 
-    function registrationNumberGenerator() {
-        $year = date('Y');
+    public function show(int $id)
+    {
+        $user = User::find($id);
+        if(!$user) {
+            return Response()->json([
+                'status' => 'error',
+                'message' => 'usuário não encontrado',
+            ], 404);
+        }
 
-        // Gerar uma matrícula única baseada no ano atual
-        $registration = $year . uniqid();
-
-        return $registration;
+        return Response()->json($user, 200);
     }
 }
