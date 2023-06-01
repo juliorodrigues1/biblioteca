@@ -69,4 +69,31 @@ class BookService
         }
     }
 
+    public function destroy(int $id){
+        try {
+            DB::beginTransaction();
+            $book = Book::find($id);
+            if(!$book){
+                return Response()->json([
+                    'status' => 'error',
+                    'message' => 'livro não encontrado',
+                ], 404);
+            }
+
+            $book->delete();
+            DB::commit();
+            return Response()->json([
+                'status' => 'success',
+                'message' => 'livro excluído com sucesso',
+            ], 200);
+
+        }catch (\Exception $e){
+            DB::rollBack();
+            return Response()->json([
+                'status' => 'error',
+                'message' => 'erro ao excluir livro',
+            ], 500);
+        }
+    }
+
 }

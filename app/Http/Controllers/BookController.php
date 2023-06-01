@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Services\BookService;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,15 @@ class BookController extends Controller
         return $this->bookService->index();
     }
 
-    public function update(Request $request, int $id)
+    public function update(UpdateBookRequest $request, int $id)
     {
         return $this->bookService->update($request, $id);
     }
+
+    public function destroy(int $id)
+    {
+        return $this->bookService->destroy($id);
+    }
+
 
 }
