@@ -46,4 +46,41 @@ class UserService
         $users = User::paginate(10);
         return Response()->json($users, 200);
     }
+
+    public function update($request, int $id)
+    {
+        try {
+            DB::beginTransaction();
+            $user = User::find($id);
+            if(!$user) {
+                return Response()->json([
+                    'status' => 'error',
+                    'message' => 'usuário não encontrado',
+                ], 404);
+            }
+            if ($user->email != $request->email){
+                $userExists = User::where('email', $request->email)->first();
+                if($userExists) {
+                    return Response()->json([
+                        'status' => 'error',
+                        'message' => 'email já cadastrado',
+                    ], 400);
+                }
+            }
+
+            $user->nome = $request->nome;
+            $user->email = $request->email;
+
+            $user->save();
+            DB::commit();
+            return Response()->json($user, 200);
+
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return Response()->json([
+                'status' => 'error',
+                'message' => 'erro ao atualizar usuário',
+            ], 500);
+        }
+    }
 }

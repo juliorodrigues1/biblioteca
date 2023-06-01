@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Services\UserService;
 
 class UserController extends Controller
@@ -31,6 +32,11 @@ class UserController extends Controller
     public function index()
     {
         return $this->userService->index();
+    }
+
+    public function update(UpdateUserRequest $request, int $id)
+    {
+        return $this->userService->update($request, $id);
     }
 
 }
