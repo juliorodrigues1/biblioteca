@@ -40,4 +40,10 @@ class UserService
 
         return Response()->json($user, 200);
     }
+
+    public function index()
+    {
+        $users = User::paginate(10);
+        return Response()->json($users, 200);
+    }
 }

@@ -28,4 +28,9 @@ class UserController extends Controller
         return $this->userService->show($id);
     }
 
+    public function index()
+    {
+        return $this->userService->index();
+    }
+
 }
