@@ -31,5 +31,10 @@ class Book extends Model
         return $this->belongsTo(Genre::class, 'genero_id', 'id');
     }
 
+    public function getSituacaoAttribute($value)
+    {
+        return $value == 1 ? 'Disponivel' : 'Emprestado';
+    }
+
 
 }
