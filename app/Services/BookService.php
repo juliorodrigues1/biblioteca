@@ -36,4 +36,9 @@ class BookService
 
     }
 
+    public function index(){
+        $books = Book::with('genre')->paginate(10);
+        return Response()->json($books, 200);
+    }
+
 }

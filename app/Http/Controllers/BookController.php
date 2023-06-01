@@ -28,4 +28,9 @@ class BookController extends Controller
         return $this->bookService->show($id);
     }
 
+    public function index()
+    {
+        return $this->bookService->index();
+    }
+
 }
