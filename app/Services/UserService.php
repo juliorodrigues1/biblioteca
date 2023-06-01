@@ -83,4 +83,32 @@ class UserService
             ], 500);
         }
     }
+
+    public function destroy(int $id)
+    {
+        try {
+            DB::beginTransaction();
+            $user = User::find($id);
+            if(!$user) {
+                return Response()->json([
+                    'status' => 'error',
+                    'message' => 'usuário não encontrado',
+                ], 404);
+            }
+
+            $user->delete();
+            DB::commit();
+            return Response()->json([
+                'status' => 'success',
+                'message' => 'usuário deletado com sucesso',
+            ], 200);
+
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return Response()->json([
+                'status' => 'error',
+                'message' => 'erro ao deletar usuário',
+            ], 500);
+        }
+    }
 }
