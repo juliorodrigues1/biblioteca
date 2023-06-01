@@ -33,4 +33,9 @@ class BookController extends Controller
         return $this->bookService->index();
     }
 
+    public function update(Request $request, int $id)
+    {
+        return $this->bookService->update($request, $id);
+    }
+
 }

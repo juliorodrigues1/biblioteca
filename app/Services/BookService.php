@@ -41,4 +41,32 @@ class BookService
         return Response()->json($books, 200);
     }
 
+    public function update($request, int $id){
+        try {
+            DB::beginTransaction();
+            $book = Book::find($id);
+            if(!$book){
+                return Response()->json([
+                    'status' => 'error',
+                    'message' => 'livro não encontrado',
+                ], 404);
+            }
+
+            $book->nome = $request->nome;
+            $book->autor = $request->autor;
+            $book->situacao = $request->situacao;
+            $book->genero_id = $request->genero_id;
+            $book->save();
+
+            DB::commit();
+            return Response()->json($book, 200);
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return Response()->json([
+                'status' => 'error',
+                'message' => 'erro ao cadastrar livro',
+            ], 500);
+        }
+    }
+
 }
