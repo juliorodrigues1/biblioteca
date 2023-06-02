@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('usuario_id');
             $table->unsignedBigInteger('livro_id');
-            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->foreign('livro_id')->references('id')->on('books');
             $table->date('data_devolucao');
             $table->enum('situacao', [1, 2, 3])->default(1)->comment('1 - Emprestado, 2 - Devolvido, 3 - Atrasado');
