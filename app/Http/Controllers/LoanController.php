@@ -23,4 +23,9 @@ class LoanController extends Controller
         return $this->loanService->loan($request);
     }
 
+    public function devolution(Request $request)
+    {
+        return $this->loanService->devolution($request);
+    }
+
 }
