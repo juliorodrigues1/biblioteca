@@ -31,3 +31,5 @@ Route::put('/books/{id}', [\App\Http\Controllers\BookController::class, 'update'
 Route::delete('/books/{id}', [\App\Http\Controllers\BookController::class, 'destroy']);
 
 Route::post('/loans', [\App\Http\Controllers\LoanController::class, 'store']);
+Route::put('/loans/devolution', [\App\Http\Controllers\LoanController::class, 'devolution']);
+Route::put('/loans/delayed', [\App\Http\Controllers\LoanController::class, 'devolution']);
